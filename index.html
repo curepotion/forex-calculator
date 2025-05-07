@@ -56,7 +56,18 @@
   <p id="stopLossResult" class="loss-result">停損結果：--</p>
 
   <script>
-    const tradingViewSymbols = { xauusd: 'OANDA:XAUUSD', solusd: 'BINANCE:SOLUSDT', spx500: 'OANDA:SPX500USD' };
+    const tradingViewSymbols = { 
+      xauusd: 'OANDA:XAUUSD', 
+      solusd: 'BINANCE:SOLUSDT', 
+      spx500: 'OANDA:SPX500USD',
+      btcusd: 'BINANCE:BTCUSDT',
+      ethusd: 'BINANCE:ETHUSDT',
+      nasdaq: 'NASDAQ:NDX',
+      dow: 'DJ:DJI',
+      usdjpy: 'OANDA:USDJPY',
+      eurusd: 'OANDA:EURUSD',
+      gbpusd: 'OANDA:GBPUSD'
+    };
 
     function loadTradingView(symbolKey) {
       const container = document.getElementById('tv-widget');
@@ -76,7 +87,23 @@
       script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
       script.type = 'text/javascript';
       script.async = true;
-      script.text = JSON.stringify({ symbols: [{ proName: tradingViewSymbols[symbolKey], title: symbolKey.toUpperCase() }], colorTheme: 'dark', isTransparent: false, displayMode: 'adaptive', locale: 'en' });
+      script.text = JSON.stringify({
+        symbols: [
+          { proName: tradingViewSymbols[symbolKey], title: symbolKey.toUpperCase() },
+          { proName: "BINANCE:BTCUSDT", title: "BTC" },
+          { proName: "BINANCE:ETHUSDT", title: "ETH" },
+          { proName: "NASDAQ:NDX", title: "NASDAQ" },
+          { proName: "DJ:DJI", title: "DOW" },
+          { proName: "OANDA:EURUSD", title: "EUR/USD" },
+          { proName: "OANDA:GBPUSD", title: "GBP/USD" }
+        ],
+        colorTheme: "dark",
+        isTransparent: false,
+        displayMode: "adaptive",
+        locale: "en",
+        showSymbolLogo: true,
+        largeChartUrl: ""
+      });
       container.appendChild(script);
     }
 
